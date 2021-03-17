@@ -48,6 +48,7 @@ export class AddMeasurementPage implements OnInit, AfterViewInit {
   problem_data: any;
   value = 0;
   db = 0;
+  spinAlert: any;
 
   constructor(
     private geolocation: Geolocation,
@@ -62,6 +63,7 @@ export class AddMeasurementPage implements OnInit, AfterViewInit {
     private networkService: NetworkService,
     private network: Network,
     private apiService: ApiService,
+
 
   ) {
     this.router.routeReuseStrategy.shouldReuseRoute = function () {
@@ -133,6 +135,7 @@ export class AddMeasurementPage implements OnInit, AfterViewInit {
 
     this.hiddenInput.nativeElement.focus();
     this.heightInput.el.setFocus();
+    this.presentSpinner();
 
   }
 
@@ -199,6 +202,34 @@ export class AddMeasurementPage implements OnInit, AfterViewInit {
     await alert.present();
   }
 
+//===
+
+  //Creates Loading Spinner When Called
+  async presentSpinner() {
+
+    console.log('Alert Spun')
+    this.spinAlert = await this.alertController.create({
+
+      header: `Test Alert`,
+      
+    }
+    )
+
+    await this.spinAlert.present();
+
+    
+
+
+  }
+
+  //Closes inputted Alert - Assumed to be the Spinner
+  //From Present Spinner
+  async closeSpinner(spinner) {
+
+
+  }
+
+//===
 
   getCurrentDateTime() {
     let date = new Date();
