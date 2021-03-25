@@ -16,6 +16,8 @@ import { ApiService } from '../services/api.service';
 import { NetworkService, ConnectionStatus } from 'src/app/services/network.service';
 import { Network } from '@ionic-native/network/ngx'
 
+import { LoadingController } from '@ionic/angular';
+
 
 const URL = 'http://liquidearthlake.org/json/getalldistances/' + 35.9049 + '/' + -79.0469;
 
@@ -48,7 +50,6 @@ export class AddMeasurementPage implements OnInit, AfterViewInit {
   problem_data: any;
   value = 0;
   db = 0;
-  spinAlert: any;
 
   constructor(
     private geolocation: Geolocation,
@@ -139,6 +140,12 @@ export class AddMeasurementPage implements OnInit, AfterViewInit {
 
   }
 
+  ionViewDidEnter() {
+
+    console.log('Closing Alert')
+
+  }
+
 
   async presentAlert() {
 
@@ -207,25 +214,11 @@ export class AddMeasurementPage implements OnInit, AfterViewInit {
   //Creates Loading Spinner When Called
   async presentSpinner() {
 
-    console.log('Alert Spun')
-    this.spinAlert = await this.alertController.create({
-
-      header: `Test Alert`,
-      
-    }
-    )
-
-    await this.spinAlert.present();
-
-    
-
-
   }
 
   //Closes inputted Alert - Assumed to be the Spinner
   //From Present Spinner
   async closeSpinner(spinner) {
-
 
   }
 
