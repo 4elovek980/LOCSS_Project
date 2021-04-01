@@ -16,7 +16,6 @@ import { ApiService } from '../services/api.service';
 import { NetworkService, ConnectionStatus } from 'src/app/services/network.service';
 import { Network } from '@ionic-native/network/ngx'
 
-import { LoadingController } from '@ionic/angular';
 
 
 const URL = 'http://liquidearthlake.org/json/getalldistances/' + 35.9049 + '/' + -79.0469;
@@ -136,13 +135,10 @@ export class AddMeasurementPage implements OnInit, AfterViewInit {
 
     this.hiddenInput.nativeElement.focus();
     this.heightInput.el.setFocus();
-    this.presentSpinner();
 
   }
 
   ionViewDidEnter() {
-
-    console.log('Closing Alert')
 
   }
 
@@ -211,16 +207,7 @@ export class AddMeasurementPage implements OnInit, AfterViewInit {
 
 //===
 
-  //Creates Loading Spinner When Called
-  async presentSpinner() {
 
-  }
-
-  //Closes inputted Alert - Assumed to be the Spinner
-  //From Present Spinner
-  async closeSpinner(spinner) {
-
-  }
 
 //===
 
@@ -254,6 +241,9 @@ export class AddMeasurementPage implements OnInit, AfterViewInit {
           this.setUnits(this.nearestGaugeIncID);
           this.hiddenInput.nativeElement.focus();
           this.heightInput.el.setFocus();
+
+          //Disables Spinning Element
+
         },
           (error: any) => {
             console.log(error);
@@ -287,6 +277,8 @@ export class AddMeasurementPage implements OnInit, AfterViewInit {
   
 
         this.getLocation();
+
+        
       },
         (error: any) => {
           console.log(error);
@@ -494,5 +486,6 @@ export class AddMeasurementPage implements OnInit, AfterViewInit {
         });
 
   }
+
 
 }
