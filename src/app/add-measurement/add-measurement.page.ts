@@ -17,12 +17,13 @@ import { NetworkService, ConnectionStatus } from 'src/app/services/network.servi
 import { Network } from '@ionic-native/network/ngx'
 
 
+import { NgxSpinnerService } from "ngx-spinner";
 
 const URL = 'http://liquidearthlake.org/json/getalldistances/' + 35.9049 + '/' + -79.0469;
 
 @Component({
   selector: 'app-add-measurement',
-  templateUrl: 'add-measurement.page.html',
+  templateUrl: 'add-measurement.page.html', 
   styleUrls: ['add-measurement.page.scss']
 })
 export class AddMeasurementPage implements OnInit, AfterViewInit {
@@ -64,6 +65,8 @@ export class AddMeasurementPage implements OnInit, AfterViewInit {
     private network: Network,
     private apiService: ApiService,
 
+    private spinner: NgxSpinnerService
+
 
   ) {
     this.router.routeReuseStrategy.shouldReuseRoute = function () {
@@ -80,6 +83,7 @@ export class AddMeasurementPage implements OnInit, AfterViewInit {
 
   ngOnInit() {
 
+    this.spinner.show();
     this.getCurrentDateTime()
     this.getAllGauges();
 
@@ -243,7 +247,7 @@ export class AddMeasurementPage implements OnInit, AfterViewInit {
           this.heightInput.el.setFocus();
 
           //Disables Spinning Element
-
+          this.spinner.hide();
         },
           (error: any) => {
             console.log(error);
