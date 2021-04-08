@@ -19,11 +19,13 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { Network } from '@ionic-native/network/ngx';
 
+import { NgxSpinnerModule } from "ngx-spinner";
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, FormsModule, HttpClientModule, ReactiveFormsModule, HttpModule, 
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, NgxSpinnerModule, FormsModule, HttpClientModule, ReactiveFormsModule, HttpModule, 
   IonicStorageModule.forRoot(), 
   CacheModule.forRoot({ keyPrefix: 'my-app-cache'}), NgbModule.forRoot()],
   
