@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 
-
+import { NgxSpinnerService } from "ngx-spinner";
 
 declare var google;
 
@@ -33,7 +33,14 @@ export class GaugeListMapPage {
   marker: any;
 
 
-  constructor(public loadingcontrl: LoadingController, private splash: SplashScreen, public geolocation: Geolocation, private platform: Platform, private http: HttpClient, public navctrl: NavController, private router: Router) {
+  constructor(public loadingcontrl: LoadingController, 
+    private splash: SplashScreen, 
+    public geolocation: Geolocation, 
+    private platform: Platform, 
+    private http: HttpClient, 
+    public navctrl: NavController, 
+    private spinner: NgxSpinnerService,
+    private router: Router) {
 
 
   }
@@ -41,7 +48,7 @@ export class GaugeListMapPage {
   ngOnInit() {
     //console.log("Ionview");
     //this.splash.show();
-
+    this.spinner.show();
     this.addMarkerToMap();
     this.locate();
 
@@ -72,15 +79,17 @@ export class GaugeListMapPage {
         mapTypeControl: false,
         mapTypeId: google.maps.MapTypeId.ROADMAP,
         eneableHighAccuracy: true
+        
       }
 
       this.map = new google.maps.Map(this.mapElement.nativeElement, this.mapOptions);
       this.addMarkerToMap();
 
-
+      this.spinner.hide();
     }).catch((error) => {
 
       this.isGeoLocationFound = false;
+      this.spinner.hide();
       //console.log('Error getting location', error);
     });
   }

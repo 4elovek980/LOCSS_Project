@@ -84,6 +84,10 @@ export class AddMeasurementPage implements OnInit, AfterViewInit {
   ngOnInit() {
 
     this.spinner.show();
+    setTimeout(() => {
+      /** spinner ends after 5 seconds */
+      this.spinner.hide();
+    }, 15000);
     this.getCurrentDateTime()
     this.getAllGauges();
 
@@ -256,6 +260,7 @@ export class AddMeasurementPage implements OnInit, AfterViewInit {
       // console.log(resp.coords.longitude);
     }).catch((error) => {
       this.isGeoLocationFound = false;
+      this.spinner.hide();
       //console.log('Error getting location', error);
     });
 

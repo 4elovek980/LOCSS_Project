@@ -7,6 +7,8 @@ import * as moment from 'moment';
 import { AlertController } from '@ionic/angular';
 import * as $ from 'jquery';
 
+import { NgxSpinnerService } from "ngx-spinner";
+
 @Component({
   selector: 'app-view-gauge',
   templateUrl: 'view-gauge.page.html',
@@ -15,7 +17,10 @@ import * as $ from 'jquery';
 
 export class ViewGaugePage {
 
-  constructor(private alertController: AlertController, private http: HttpClient, private route: ActivatedRoute, private router: Router, private splash: SplashScreen) { }
+  constructor(private alertController: AlertController, private http: HttpClient, private route: ActivatedRoute, private router: Router,
+  
+  private spinner: NgxSpinnerService,
+  private splash: SplashScreen) { }
   @ViewChild('barCanvas') barCanvas;
 
   barChart: any;
@@ -27,6 +32,7 @@ export class ViewGaugePage {
   buttonVal = 0;
 
   ngOnInit() {
+    this.spinner.show();
     this.loadAllData = false;
     this.getHeight();
     this.splash.hide();
@@ -175,9 +181,11 @@ export class ViewGaugePage {
         //console.log(this.height_data[0].unit);
         this.getReadings();
         this.getReadingsForTable(6);
+        this.spinner.hide();
       },
         (error: any) => {
           console.log(error);
+          this.spinner.hide();
         });
 
   }
