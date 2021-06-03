@@ -56,7 +56,7 @@ export class ViewDataPage {
   getLocation() {
     //console.log('Caching User Location');
 
-    let url = 'http://liquidearthlake.org/json/getalldistances/' + 35.9049 + '/' + -79.0469;
+    let url = 'https://liquidearthlake.org/json/getalldistances/' + 35.9049 + '/' + -79.0469;
     let cacheKey = url;
     let request = this.http.get(url, { observe: 'response' });
 

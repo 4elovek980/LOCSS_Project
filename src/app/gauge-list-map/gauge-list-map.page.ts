@@ -121,7 +121,7 @@ export class GaugeListMapPage {
   */
 
   addMarkerToMap() {
-    this.http.get('http://liquidearthlake.org/json/gauges')
+    this.http.get('https://liquidearthlake.org/json/gauges')
       .subscribe((gauges: any) => {
 
         //console.log(gauges);

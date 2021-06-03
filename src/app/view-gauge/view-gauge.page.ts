@@ -52,7 +52,7 @@ export class ViewGaugePage {
 
     if (range == 0) {
       //All Data
-      let source = ('http://liquidearthlake.org/json/getjsondataall/' + id);
+      let source = ('https://liquidearthlake.org/json/getjsondataall/' + id);
 
       //console.log("Source for table");
       //console.log(source);
@@ -73,7 +73,7 @@ export class ViewGaugePage {
     }
     else if (range == 1) {
       //One Year
-      let source = ('http://liquidearthlake.org/json/getjsondataoney/' + id);
+      let source = ('https://liquidearthlake.org/json/getjsondataoney/' + id);
 
 
       //console.log("Source for table");
@@ -95,7 +95,7 @@ export class ViewGaugePage {
     }
     else if (range == 2) {
       //Three Months
-      let source = ('http://liquidearthlake.org/json/getjsondatathreem/' + id);
+      let source = ('https://liquidearthlake.org/json/getjsondatathreem/' + id);
 
 
       //console.log("Source for table");
@@ -117,7 +117,7 @@ export class ViewGaugePage {
     }
     else if (range == 3) {
       //One Month
-      let source = ('http://liquidearthlake.org/json/getjsondataonem/' + id);
+      let source = ('https://liquidearthlake.org/json/getjsondataonem/' + id);
 
 
       //console.log("Source for table");
@@ -139,7 +139,7 @@ export class ViewGaugePage {
     }
     else {
       //Default Six Months
-      let source = ('http://liquidearthlake.org/json/getjsondatasixm/' + id);
+      let source = ('https://liquidearthlake.org/json/getjsondatasixm/' + id);
 
       //console.log("Source for table");
       //console.log(source);
@@ -174,7 +174,7 @@ export class ViewGaugePage {
 
 
     this.http
-      .get('http://liquidearthlake.org/json/getgauge/' + id)
+      .get('https://liquidearthlake.org/json/getgauge/' + id)
       .subscribe((data: any) => {
 
         this.height_data = data;
@@ -202,13 +202,13 @@ export class ViewGaugePage {
     this.name = this.route.snapshot.paramMap.get('name');
 
 
-    //'http://liquidearthlake.org/gauge/getjsondatasixm?gauge_inc_id='+id
-    //http://liquidearthlake.org/json/getsixchart?gauge_inc_id
+    //'https://liquidearthlake.org/gauge/getjsondatasixm?gauge_inc_id='+id
+    //https://liquidearthlake.org/json/getsixchart?gauge_inc_id
 
 
 
     this.http
-      .get('http://liquidearthlake.org/json/getsixchart?gauge_inc_id=' + id)
+      .get('https://liquidearthlake.org/json/getsixchart?gauge_inc_id=' + id)
       .subscribe((data: any) => {
         //this.data =data;
 
@@ -345,9 +345,9 @@ export class ViewGaugePage {
   }
 
 
-  //'http://liquidearthlake.org/gauge/getjsondatasixm?gauge_inc_id='+id
+  //'https://liquidearthlake.org/gauge/getjsondatasixm?gauge_inc_id='+id
   //'https://liquidearthlake.org/gauge/getjsondatathreem?gauge_inc_id='+ id
-  //'http://liquidearthlake.org/json/getthreechart?gauge_inc_id='+id
+  //'https://liquidearthlake.org/json/getthreechart?gauge_inc_id='+id
 
 
   getReadingsThree() {
@@ -357,7 +357,7 @@ export class ViewGaugePage {
     let id = this.route.snapshot.paramMap.get('id');
     this.name = this.route.snapshot.paramMap.get('name');
     this.http
-      .get('http://liquidearthlake.org/json/getthreechart?gauge_inc_id=' + id)
+      .get('https://liquidearthlake.org/json/getthreechart?gauge_inc_id=' + id)
       .subscribe((data: any) => {
         //this.data =data;
 
@@ -493,7 +493,7 @@ export class ViewGaugePage {
   }
 
   //'https://liquidearthlake.org/gauge/getjsondataall?gauge_inc_id='+ id
-  //http://liquidearthlake.org/json/getallchart?gauge_inc_id=
+  //https://liquidearthlake.org/json/getallchart?gauge_inc_id=
 
   getReadingsAll() {
     var scale_size = 100;
@@ -502,7 +502,7 @@ export class ViewGaugePage {
     let id = this.route.snapshot.paramMap.get('id');
     this.name = this.route.snapshot.paramMap.get('name');
     this.http
-      .get('http://liquidearthlake.org/json/getallchart?gauge_inc_id=' + id)
+      .get('https://liquidearthlake.org/json/getallchart?gauge_inc_id=' + id)
       .subscribe((data: any) => {
         //this.data =data;
         //console.log(this.data);
@@ -627,10 +627,10 @@ export class ViewGaugePage {
     this.name = this.route.snapshot.paramMap.get('name');
 
     //'https://liquidearthlake.org/gauge/getjsondataoney?gauge_inc_id='+ id
-    //http://liquidearthlake.org/json/getyearchart?gauge_inc_id=
+    //https://liquidearthlake.org/json/getyearchart?gauge_inc_id=
 
     this.http
-      .get('http://liquidearthlake.org/json/getyearchart?gauge_inc_id=' + id)
+      .get('https://liquidearthlake.org/json/getyearchart?gauge_inc_id=' + id)
       .subscribe((data: any) => {
         //this.data =data;
         //console.log(this.data);
@@ -747,10 +747,10 @@ export class ViewGaugePage {
     this.name = this.route.snapshot.paramMap.get('name');
 
     //'https://liquidearthlake.org/gauge/getjsondataonem?gauge_inc_id='+ id
-    //http://liquidearthlake.org/json/getonechart?gauge_inc_id=
+    //https://liquidearthlake.org/json/getonechart?gauge_inc_id=
 
     this.http
-      .get('http://liquidearthlake.org/json/getonechart?gauge_inc_id=' + id)
+      .get('https://liquidearthlake.org/json/getonechart?gauge_inc_id=' + id)
       .subscribe((data: any) => {
         //this.data =data;
         //console.log(this.data);

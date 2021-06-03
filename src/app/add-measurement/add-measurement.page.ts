@@ -19,7 +19,7 @@ import { Network } from '@ionic-native/network/ngx'
 
 import { NgxSpinnerService } from "ngx-spinner";
 
-const URL = 'http://liquidearthlake.org/json/getalldistances/' + 35.9049 + '/' + -79.0469;
+const URL = 'https://liquidearthlake.org/json/getalldistances/' + 35.9049 + '/' + -79.0469;
 
 @Component({
   selector: 'app-add-measurement',
@@ -241,7 +241,7 @@ export class AddMeasurementPage implements OnInit, AfterViewInit {
       } else if (this.router.url.split('/')[3] && this.router.url.split('/')[3] == 'closest') {
         this.router.navigateByUrl('/tabs/add-measurement');
       }
-      this.http.get('http://liquidearthlake.org/json/getnearestgauge/' + coords)
+      this.http.get('https://liquidearthlake.org/json/getnearestgauge/' + coords)
         .subscribe((data: any) => {
           this.nearestGauge = data;
           this.nearestGaugeID = data.gauge_id;
@@ -268,7 +268,7 @@ export class AddMeasurementPage implements OnInit, AfterViewInit {
 
 
   getAllGauges() {
-    this.http.get('http://liquidearthlake.org/json/gauges')
+    this.http.get('https://liquidearthlake.org/json/gauges')
       .subscribe((data: any) => {
         this.gauges = data;
 
@@ -339,16 +339,16 @@ export class AddMeasurementPage implements OnInit, AfterViewInit {
 
 
 
-      //"http://liquidearthlake.org/json/reading/store", form.value
-      //"http://liquidearthlake.org/json/store/offline", JSON.stringify({result}))
-      //"http://liquidearthlake.org/json/store/offline", result
-      //"http://liquidearthlake.org/json/reading/store", JSON.stringify({result})
+      //"https://liquidearthlake.org/json/reading/store", form.value
+      //"https://liquidearthlake.org/json/store/offline", JSON.stringify({result}))
+      //"https://liquidearthlake.org/json/store/offline", result
+      //"https://liquidearthlake.org/json/reading/store", JSON.stringify({result})
 
 
 
 
 
-      this.http.post("http://liquidearthlake.org/json/reading/store", JSON.stringify({ result }), {
+      this.http.post("https://liquidearthlake.org/json/reading/store", JSON.stringify({ result }), {
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
@@ -404,7 +404,7 @@ export class AddMeasurementPage implements OnInit, AfterViewInit {
           //console.log(JSON.stringify({result}));
 
 
-          this.http.post("http://liquidearthlake.org/json/reading/store", JSON.stringify({ result }), {
+          this.http.post("https://liquidearthlake.org/json/reading/store", JSON.stringify({ result }), {
             headers: {
               'Content-Type': 'application/json',
               'Accept': 'application/json',
@@ -460,7 +460,7 @@ export class AddMeasurementPage implements OnInit, AfterViewInit {
     //console.log("Setting Units");
 
     this.http
-      .get('http://liquidearthlake.org/json/getgauge/' + id)
+      .get('https://liquidearthlake.org/json/getgauge/' + id)
       .subscribe((data: any) => {
 
         this.height_data = data;
