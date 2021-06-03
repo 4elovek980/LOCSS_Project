@@ -7,6 +7,8 @@ import { IonicModule } from '@ionic/angular';
 
 import { GaugeListMapPage } from './gauge-list-map.page';
 
+import { NgxSpinnerModule } from "ngx-spinner";
+
 const routes: Routes = [
   {
     path: '',
@@ -19,6 +21,9 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
+
+    NgxSpinnerModule,
+
     RouterModule.forChild(routes)
   ],
   declarations: [GaugeListMapPage]

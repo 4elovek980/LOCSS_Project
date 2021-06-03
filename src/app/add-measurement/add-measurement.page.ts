@@ -17,11 +17,13 @@ import { NetworkService, ConnectionStatus } from 'src/app/services/network.servi
 import { Network } from '@ionic-native/network/ngx'
 
 
+import { NgxSpinnerService } from "ngx-spinner";
+
 const URL = 'http://liquidearthlake.org/json/getalldistances/' + 35.9049 + '/' + -79.0469;
 
 @Component({
   selector: 'app-add-measurement',
-  templateUrl: 'add-measurement.page.html',
+  templateUrl: 'add-measurement.page.html', 
   styleUrls: ['add-measurement.page.scss']
 })
 export class AddMeasurementPage implements OnInit, AfterViewInit {
@@ -29,6 +31,7 @@ export class AddMeasurementPage implements OnInit, AfterViewInit {
   @ViewChild('hiddenInput') hiddenInput: ElementRef;
 
 
+  //If you can see this, you can read!
   //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
   //Add 'implements OnInit' to the class.
   isGeoLocationFound: boolean;
@@ -62,6 +65,9 @@ export class AddMeasurementPage implements OnInit, AfterViewInit {
     private network: Network,
     private apiService: ApiService,
 
+    private spinner: NgxSpinnerService
+
+
   ) {
     this.router.routeReuseStrategy.shouldReuseRoute = function () {
       return false;
@@ -77,8 +83,14 @@ export class AddMeasurementPage implements OnInit, AfterViewInit {
 
   ngOnInit() {
 
+    this.spinner.show();
+    setTimeout(() => {
+      /** spinner ends after 5 seconds */
+      this.spinner.hide();
+    }, 15000);
     this.getCurrentDateTime()
     this.getAllGauges();
+
 
     if (!this.isGeoLocationFound) {
       //this.presentAlertPrompt();
@@ -115,16 +127,26 @@ export class AddMeasurementPage implements OnInit, AfterViewInit {
       this.nearestGaugeID = this.nearestGauge[0].gauge_id;
 
 
+
       //  console.log('New Gauge Value on Entering');
       //  console.log(this.nearestGaugeID);
 
-      this.setUnits(id);
+
+  
 
 
     }
 
+
+    this.setUnits(id);
+
+
     this.hiddenInput.nativeElement.focus();
     this.heightInput.el.setFocus();
+
+  }
+
+  ionViewDidEnter() {
 
   }
 
@@ -191,6 +213,11 @@ export class AddMeasurementPage implements OnInit, AfterViewInit {
     await alert.present();
   }
 
+//===
+
+
+
+//===
 
   getCurrentDateTime() {
     let date = new Date();
@@ -222,6 +249,9 @@ export class AddMeasurementPage implements OnInit, AfterViewInit {
           this.setUnits(this.nearestGaugeIncID);
           this.hiddenInput.nativeElement.focus();
           this.heightInput.el.setFocus();
+
+          //Disables Spinning Element
+          this.spinner.hide();
         },
           (error: any) => {
             console.log(error);
@@ -230,6 +260,7 @@ export class AddMeasurementPage implements OnInit, AfterViewInit {
       // console.log(resp.coords.longitude);
     }).catch((error) => {
       this.isGeoLocationFound = false;
+      this.spinner.hide();
       //console.log('Error getting location', error);
     });
 
@@ -240,11 +271,29 @@ export class AddMeasurementPage implements OnInit, AfterViewInit {
     this.http.get('http://liquidearthlake.org/json/gauges')
       .subscribe((data: any) => {
         this.gauges = data;
+
+
+        //Behavior Concern - Gaugues are sorted from this console log before sort
+        //is performed sequentially below this line. 
+        //No impact on functionality, but investigate discrepancy. (2-20-21)
+        console.log("Downloaded Gauges");
+        console.log(this.gauges);
+    
+        this.gauges.sort((a, b) => (b['name'] < a['name']) ? 1 : -1);
+    
+        console.log("Sorted Gauges");
+        console.log(this.gauges);
+  
+
         this.getLocation();
+
+        
       },
         (error: any) => {
           console.log(error);
         });
+
+
   }
 
 
@@ -446,5 +495,6 @@ export class AddMeasurementPage implements OnInit, AfterViewInit {
         });
 
   }
+
 
 }

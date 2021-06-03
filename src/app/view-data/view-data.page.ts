@@ -5,6 +5,9 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { Observable } from 'rxjs/Observable'
 import { CacheService } from 'ionic-cache';
 import 'rxjs/add/operator/map';
+
+import { NgxSpinnerService } from "ngx-spinner";
+
 //import  { Http } from '@angular/http';
 import { Storage } from '@ionic/storage';
 import { map } from 'rxjs/operators';
@@ -31,12 +34,17 @@ export class ViewDataPage {
   public films: Observable<any>;
   filmsKey = 'my-films-group';
 
-  constructor(private storage: Storage, private http: HttpClient, private splash: SplashScreen, private geolocation: Geolocation, private cache: CacheService) { }
+  constructor(private storage: Storage, private http: HttpClient, private splash: SplashScreen, private geolocation: Geolocation, 
+    
+    private spinner: NgxSpinnerService,
+    private cache: CacheService) { }
 
   ngOnInit() {
     // this.splash.show();
+    this.spinner.show();
     this.getLocation();
     this.getAllGauges();
+
 
   }
 
@@ -59,6 +67,8 @@ export class ViewDataPage {
       .subscribe((res: any) => {
         this.gauges = res;
         //console.log(res);
+
+        this.spinner.hide();
       })
 
   }
